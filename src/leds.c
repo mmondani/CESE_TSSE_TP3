@@ -12,5 +12,10 @@ void LedsCreate (uint16_t* direccion)
 
 void LedsOn (int led)
 {
-    *puerto = 0x0004;
+    *puerto |= (1 << (led -1));
+}
+
+void LedsOff (int led)
+{
+    *puerto &= ~(1 << (led - 1));
 }

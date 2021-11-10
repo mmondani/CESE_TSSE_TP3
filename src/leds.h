@@ -3,3 +3,5 @@
 void LedsCreate (uint16_t* direccion);
 
 void LedsOn (int led);
+
+void LedsOff (int led);
