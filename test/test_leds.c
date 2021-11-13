@@ -1,6 +1,3 @@
-/**
- * Revisar los límites de los parámetros
- */
 #include "unity.h"
 #include "leds.h"
 //#include "mock_errores.h"
@@ -115,4 +112,31 @@ void test_consultar_led_encendido (void)
     estadoLed = LedsGetState(6);
 
     TEST_ASSERT_EQUAL_INT(1, estadoLed);
+}
+
+/* Revisar los límites de los parámetros: encender led 0 */
+void test_limite_parametro_encender_0 (void) 
+{
+    LedsOn(0);
+
+    TEST_ASSERT_EQUAL(0, error.gravedad);
+    TEST_ASSERT_EQUAL_STRING("LedsOn", error.funcion);
+}
+
+/* Revisar los límites de los parámetros: apagar led 0 */
+void test_limite_parametro_apagar_0 (void) 
+{
+    LedsOff(0);
+
+    TEST_ASSERT_EQUAL(0, error.gravedad);
+    TEST_ASSERT_EQUAL_STRING("LedsOff", error.funcion);
+}
+
+/* Revisar los límites de los parámetros: apagar led 17 */
+void test_limite_parametro_apagar_17 (void) 
+{
+    LedsOff(17);
+
+    TEST_ASSERT_EQUAL(0, error.gravedad);
+    TEST_ASSERT_EQUAL_STRING("LedsOff", error.funcion);
 }

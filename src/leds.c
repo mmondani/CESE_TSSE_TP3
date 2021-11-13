@@ -32,12 +32,18 @@ void LedsOn (int led)
     {
         RegistrarMensaje(0, __FUNCTION__, __LINE__, "Numero de led invalido");
     }
-    
 }
 
 void LedsOff (int led)
 {
-    *puerto &= ~LedToMask(led);
+    if ((led >= 1) && (led <= 16)) 
+    {
+        *puerto &= ~LedToMask(led);
+    }
+    else
+    {
+        RegistrarMensaje(0, __FUNCTION__, __LINE__, "Numero de led invalido");
+    }
 }
 
 void LedsAllOn (void)
