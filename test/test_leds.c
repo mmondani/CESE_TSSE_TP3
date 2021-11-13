@@ -140,3 +140,19 @@ void test_limite_parametro_apagar_17 (void)
     TEST_ASSERT_EQUAL(0, error.gravedad);
     TEST_ASSERT_EQUAL_STRING("LedsOff", error.funcion);
 }
+
+/* El led 1 corresponde el lsb */
+void test_led_1_es_lsb (void) 
+{
+    LedsOn(1);
+
+    TEST_ASSERT_EQUAL_HEX16(0x0001, puertoVirtual);
+}
+
+/* El led 16 corresponde el msb */
+void test_led_16_es_msb (void) 
+{
+    LedsOn(16);
+
+    TEST_ASSERT_EQUAL_HEX16(0x8000, puertoVirtual);
+}
