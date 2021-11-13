@@ -1,8 +1,4 @@
 /**
- * Prender todos los leds juntos
- * Apagar todos los leds juntos
- * Consultar el estado de un led apagado
- * Consultar el estado de un led encendido
  * Revisar los límites de los parámetros
  */
 #include "unity.h"
@@ -79,4 +75,44 @@ void test_error_en_parametro_led_on (void)
 
     TEST_ASSERT_EQUAL(0, error.gravedad);
     TEST_ASSERT_EQUAL_STRING("LedsOn", error.funcion);
+}
+
+/* Prender todos los leds juntos */
+void test_encender_todos_los_leds (void) 
+{
+    LedsAllOn();
+
+    TEST_ASSERT_EQUAL_HEX16(0xFFFF, puertoVirtual);
+}
+
+/* Apagar todos los leds juntos */
+void test_apagar_todos_los_leds (void) 
+{
+    LedsAllOn();
+    LedsAllOff();
+
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puertoVirtual);
+}
+
+/* Consultar el estado de un led apagado */
+void test_consultar_led_apagado (void) 
+{
+    int estadoLed = 1;
+    
+    LedsOn(6);
+    LedsOff(6);
+    estadoLed = LedsGetState(6);
+
+    TEST_ASSERT_EQUAL_INT(0, estadoLed);
+}
+
+/* Consultar el estado de un led encendido */
+void test_consultar_led_encendido (void) 
+{
+    int estadoLed = 0;
+    
+    LedsOn(6);
+    estadoLed = LedsGetState(6);
+
+    TEST_ASSERT_EQUAL_INT(1, estadoLed);
 }

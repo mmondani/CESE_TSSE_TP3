@@ -39,3 +39,18 @@ void LedsOff (int led)
 {
     *puerto &= ~LedToMask(led);
 }
+
+void LedsAllOn (void)
+{
+    *puerto = 0xFFFF;
+}
+
+void LedsAllOff (void)
+{
+    *puerto = 0x0000;
+}
+
+int LedsGetState (int led)
+{
+    return ((*puerto) & LedToMask(led)) != 0;
+}
